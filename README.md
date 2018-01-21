@@ -8,10 +8,18 @@ repeated elements.
 
 ## a quick example
 
+Executing this code:
+
 [embedmd]:# (example_test.go /.*s :=/ /Println.*/)
 ```go
 	s := []int{3, 5, 1, 7, 2, 3, 7, 5, 2}
 	less := func(i, j int) bool { return s[i] < s[j] }
 	unique.Slice(&s, less)
 	fmt.Println(s)
+```
+
+Will output the following:
+
+```
+[1 2 3 5 7]
 ```
