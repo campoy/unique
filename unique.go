@@ -11,7 +11,7 @@ import (
 // The function panics if the provided interface is not a pointer to a slice.
 func Slice(slicePtr interface{}, less func(i, j int) bool) {
 	v := reflect.ValueOf(slicePtr).Elem()
-	if v.Len() == 0 {
+	if v.Len() <= 1 {
 		return
 	}
 	sort.Slice(v.Interface(), less)
