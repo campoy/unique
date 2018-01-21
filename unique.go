@@ -16,13 +16,14 @@ func Slice(slicePtr interface{}, less func(i, j int) bool) {
 	}
 	sort.Slice(v.Interface(), less)
 
-	l := 1
-	for i := 1; i < v.Len(); i++ {
-		if !less(i, l-1) && !less(l-1, i) {
+	i := 0
+	for j := 1; j < v.Len(); j++ {
+		if !less(i, j) {
 			continue
 		}
-		v.Index(l).Set(v.Index(i))
-		l++
+		i++
+		v.Index(i).Set(v.Index(j))
 	}
-	v.SetLen(l)
+	i++
+	v.SetLen(i)
 }
