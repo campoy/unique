@@ -1,9 +1,8 @@
 package unique
 
 import (
+	"reflect"
 	"testing"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 func ints(vs ...int) *[]int { return &vs }
@@ -53,8 +52,8 @@ func TestSlice(t *testing.T) {
 	for _, tc := range tt {
 		t.Run(tc.name, func(t *testing.T) {
 			Slice(tc.in, tc.less(tc.in))
-			if !cmp.Equal(tc.in, tc.out) {
-				t.Fatalf("output doesn't match: %v", cmp.Diff(tc.in, tc.out))
+			if !reflect.DeepEqual(tc.in, tc.out) {
+				t.Fatalf("expected %v; got %v", tc.out, tc.in)
 			}
 		})
 	}
